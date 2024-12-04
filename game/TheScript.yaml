@@ -1,0 +1,195 @@
+# The script of the game goes in this file.
+
+# Declare characters used by this game. The color argument colorizes the
+# name of the character.
+
+define f = Character("Narrator",  color="#e96b8d")
+define player = Character("[povname]",  color="#17ddcd")
+define b = Character("Barista",  color="#30fb81")
+define k = Character("Kritikus",  color="#d5f34f")
+
+# The game starts here.
+
+label start:
+
+    scene coffeeshop_cashiern
+
+    # This shows a character sprite. A placeholder is used, but you can
+    # replace it by adding a file named "eileen happy.png" to the images
+    # directory.
+
+    # These display lines of dialogue.
+
+    f "Kamu adalah seorang manager dari sebuah barista"
+    f "Hari ini adalah hari pertamamu bekerja!!!"
+    jump choices1
+
+label choices1:
+    f "Untuk saat ini, pilih penampilanmu"
+menu : 
+    "Laki-laki":
+        jump choices1_a
+    "Perempuan":
+        jump choices1_b
+label choices1_a:
+    f "Baik, kamu memilih karaktermu sebagai laki-laki!"
+    jump defineName
+label choices1_b:
+    f "Baik, kamu memilih karaktermu sebagai perempuan!"
+    jump defineName
+    
+label defineName :
+    python:
+        povname = renpy.input("Siapa namamu?", length=32)
+        povname = povname.strip()
+
+    f "Halo [povname]!!"
+    f "Kamu akan menjalani hari hari yang penuh dengan tantangan, dan kamu harus melewatinya dengan hati penuh semangat"
+    jump prologue
+    # Rifts apart/change bg i guess this should be, untuk sebelumnya ada lebih baiknya untuk
+label prologue :
+    #Tokoh berdiri di depan pintu cofee shop
+    #Show player angry/upset
+    #Harusnya disini ada pause dulu bbrp detik
+    player "Berani sekali orang itu menjual kopi di depan mata kita"
+    b "Sepertinya kita juga perlu untuk menjual produk kopi yang baru untuk menarik konsumen"
+    player "Tapi, aku bermimpi orang orang bisa menyukai kopi otentik Indonesia"
+    b "Lalu, mau sampai kapan engkau bermimpi? saingan kita udah ada di depan mata bos"
+    player "Akan aku pikirkan terlebih dahulu"
+    scene workspace_infront_laptop
+    f "Kamu melihat layar laptop dengan gelisah sambil menggerutu"
+    #show player thinking/confuses with a cloud of thinking americano and luwak
+    player "Hmmm, Pilih yang mana ya?"
+    jump pilihkopi
+label pilihkopi :
+menu :
+    "Tetap menjaga kopi luwak":
+        jump pilihkopi_A
+    "Tetap menambahkan menu kopi baru":
+        jump pilihkopi_B
+#========================================================BAB 1 END======================================================
+label pilihkopi_A :
+    player "Aku tetap ingin menjual kopi luwak otentik Indonesia. Kopi ini adalah identitas kita!"
+
+    f "Beberapa hari kemudian..."
+    #Show scene baru
+    f "Seorang kritikus kopi terkenal datang ke coffee shop dan memesan kopi..."
+    b "Selamat datang, silahkan pak, ada yang bisa dibantu?"
+    k "Kopi apa yang direkomendasikan disini?"
+    b "Yang direkomendasikan disini adalah kopi luwak, Pak."
+    b "Apakah bapak ingin mencicipi kopi luwak kami?"
+    k "Oke, saya akan pesan itu"
+    #MINIGAME pembuatan kopi
+
+
+
+    #Setelah minigame selesai 
+    jump story1
+label story1:
+    f "Beberapa minggu kemudian..."
+
+    f "Namun, tiba-tiba terjadi kekurangan pasokan biji kopi luwak akibat cuaca ekstrem di daerah penghasil kopi. "
+    f "Kamu menghadapi dilema besar antara harus menaikkan harga kopi atau mencari alternatif pasokan sementara."
+    #Delay
+    f "Kamu berdiskusi dengan barista mengenai pilihan yang tersedia"
+    player "Jika kita menaikkan harga, kita mungkin kehilangan pelanggan setia"
+    player "Tapi jika kita mencari pasokan alternatif, kualitas kopi kita mungkin menurun"
+    b "Ini memang situasi yang sulit, bos. Kita harus segera mengambil keputusan"
+    jump tantangan
+label tantangan:
+menu : 
+    "Naikkan harga kopi luwak.":
+        jump naikkan
+    "Cari pasokan alternatif sementara":
+        jump alternatif
+
+label naikkan:
+    f "Kamu memutuskan untuk menaikkan harga kopi luwak dan memberikan penjelasan transparan kepada pelanggan tentang situasi yang menyebabkan keputusan tersebut."
+    scene coffeeshop_cashiern
+    "Pelanggan1" "Kok harganya jadi naik drastis? Padahal rasa kopinya lebih cocok dengan harga sebelumnya loh"
+    "Pelanggan2" "Tapi ini tetep worth it to buy kok!!! Coba aja buat kopinya sendiri, masa iya harus pelihara dan olah kotoran luwaknya sendiri?!"
+    f "Beberapa pelanggan setia mengerti dan tetap mendukung coffee shop kamu, sementara yang lain berhenti datang karena harga yang terlalu tinggi."
+    f "Namun, penjualan tetap stabil dan kamu berhasil mempertahankan kualitas kopi luwak."
+
+label GoodEnd1 : 
+    f "Setelah beberapa bulan, pasokan biji kopi luwak kembali normal, dan kamu menurunkan harga kembali."
+    f "Coffee shop kamu kembali ramai, dan kamu merasa bangga karena berhasil menjaga kualitas dan otentisitas produk lokal."
+    f "Waaah, toko kita ramai sekali!. Aku akan terjun langsung melayani pelanggan!"
+    #Mini game lagi kopi buat pelanggan
+    #harusnya dibuat script lagi disini, seperti player "Selamat menikmati kopi nya!"
+    return
+
+label alternatif:
+    #scene kebun kopi
+    f " Kamu mencari pasokan alternatif biji kopi dari daerah lain sementara menunggu pasokan biji kopi luwak kembali normal."
+    "Petani Kopi" "Ini rasayang paling mirip sama kopi luwak, pak. Harganya pun lebih murah"
+    jump choices2
+
+label choices2:
+menu : 
+    "Ambil yang ini deh" :
+        jump choices2_1
+    "Pilih menaikkan harga" :
+        jump naikkan
+    
+label choices2_1 :
+    #scene meja pelanggan
+    "Pelanggan3" "Kenapa rasa kopinya berubah? Padahal saya lebih suka citarasa yang lama."
+    "Pelanggan4" "Tapi rasanya tetap enak dan tidak jauh berbeda dengan kopi sebelumnya."
+    f "Beberapa pelanggan kecewa dengan perubahan rasa, namun sebagian besar memahami situasi dan tetap mendukung coffee shop kamu."
+    f "Penjualan mengalami sedikit penurunan, tapi masih cukup untuk bertahan."
+    jump goodendchalternatif
+
+label goodendchalternatif:
+    f "Setelah beberapa bulan, pasokan biji kopi luwak kembali normal."
+    f "Kamu kembali menyajikan kopi luwak asli dan mengadakan promosi untuk menarik kembali pelanggan."
+    f "Perlahan tapi pasti, coffee shop kamu kembali ramai dan kamu merasa bangga telah melewati tantangan ini."
+    return
+
+
+#=================================================PILIHAN KOPI B (AMERICANO)==============================================
+label pilihkopi_B :
+    player "Sepertinya kita harus mencoba menambahkan menu kopi baru untuk menarik lebih banyak pelanggan."
+    
+    "Plot Twist" "Saat coffee shop mulai menawarkan kopi baru seperti americano, penjualan kopi luwak justru menurun drastis."
+    "Plot Twist" "Pelanggan lebih tertarik dengan kopi baru yang lebih murah dan cepat."
+    f "Beberapa minggu kemudian..."
+    #Minigame Y/N memberikan kopi dari tempat barista ke pelanggan dan diperlihatkan bahwa kopi americano lebih banyak yg beli.
+    f "Kamu mendapatkan laporan bahwa pendapatan mulai menurun meskipun jumlah pelanggan baru bertambah."
+    f "Kamu mulai merasakan tekanan karena harus memenuhi target penjualan sekaligus mempertahankan kualitas kopi luwak."
+
+label Tantangan2 : 
+    f "Kamu menghadapi dilema besar. Apakah akan tetap fokus pada kopi baru yang lebih laris, atau kembali mempromosikan kopi luwak yang autentik namun lebih mahal?"
+    f "Kamu berdiskusi dengan barista mengenai pilihan yang tersedia."
+    player "Kita butuh strategi yang bisa menyeimbangkan antara menarik pelanggan baru dan mempertahankan keaslian kopi kita."
+    b "Ini tidak mudah, Bos. Pelanggan saat ini lebih memilih kopi yang murah dan cepat saji."
+    f "Sementara itu, seorang pemasok menawarkan biji kopi luwak dengan harga lebih murah namun kualitas lebih rendah. "
+    f "Kamu menghadapi dilema tambahan: apakah akan menerima tawaran tersebut atau menolaknya demi menjaga kualitas."
+    jump Tantangan2Choices
+
+label Tantangan2Choices :
+menu:
+    "Terima tawaran pemasok untuk biji kopi luwak murah." :
+        jump pemasokbijimurah
+    "Tolak tawaran pemasok dan tetap dengan kualitas tinggi." :
+        jump rejectpemasokbijimurah
+
+
+label pemasokbijimurah :
+    f "Kamu memutuskan untuk menerima tawaran pemasok dan mulai menggunakan biji kopi dengan kualitas rendah."
+    f "Awalnya, penjualan kopi baru meningkat pesat dan pelanggan baru datang berbondong-bondong."
+    f "Namun, perlahan-lahan, reputasi coffee shop kamu mulai menurun karena kualitas kopi yang semakin menurun."
+    jump lanjutantantangan
+label lanjutantantangan :
+    f "Dalam beberapa bulan, pelanggan setia mulai mengeluh tentang rasa kopi yang tidak lagi sama. Kamu juga menerima banyak ulasan negatif di media sosial."
+    "Pelanggan 5" "Rasa kopinya semakin berubah, dan tidak terasa otentik kopi luwak lagi"
+    "Pelanggan 6" "Saya setuju, rasanya semakin memburuk"
+    #scene latar baru
+    player "Apa yang harus kita lakukan? Jika terus begini, kita bisa kehilangan semua pelanggan."
+    b "Kita harus mengambil keputusan cepat, Bos. Kualitas adalah kunci kesuksesan kita."
+    return
+
+
+
+
+
